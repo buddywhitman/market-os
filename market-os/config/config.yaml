@@ -1,0 +1,107 @@
+# market-os configuration — versioned single source of truth.
+data_lake_root: data_lake
+
+# Demo universe uses theme tickers; replace with a real, survivorship-complete universe
+# (including delisted names) before any historical study you intend to trust.
+universe:
+  - AI
+  - SEMI
+  - POWER
+  - DEFENSE
+  - ROBOT
+  - NUCLEAR
+  - SPACE
+  - CRYPTO
+
+# H1 Theme Hunter — themes to track and their constituent watchlists.
+themes:
+  AI:        [NVDA, MSFT, GOOGL, AMD, PLTR]
+  SEMI:      [NVDA, AVGO, ASML, TSM, AMAT]
+  POWER:     [GEV, VST, CEG, NEE, ETN]
+  DEFENSE:   [LMT, RTX, NOC, GD, LHX]
+  NUCLEAR:   [CCJ, LEU, SMR, BWXT, OKLO]
+  ROBOTICS:  [ISRG, ABB, ROK, TER, PATH]
+  SPACE:     [RKLB, LMT, BA, ASTS, RTX]
+
+# Cost & risk defaults (see src/marketos/backtest/engine.py and risk/sizing.py).
+costs:
+  brokerage_bps: 3.0
+  slippage_bps: 5.0
+
+# Default / book-wide risk limits (survival-first). Used when a sleeve omits its own.
+risk:
+  risk_per_trade: 0.0075
+  max_name_weight: 0.10
+  max_sector_weight: 0.30
+  max_gross_exposure: 1.50
+  kelly_fraction: 0.25
+  atr_stop_mult: 2.5
+  max_portfolio_drawdown: 0.20
+
+# ── Capital ring-fencing: three sleeves, three temperaments, three risk budgets. ──
+# Goal-1 aggression must be PHYSICALLY unable to touch the goal-2 book. Each sleeve
+# carries its own universe + RiskLimits. Allocation/sizing always runs per-sleeve;
+# nothing nets or rebalances across sleeve boundaries.
+sleeves:
+  # GOAL 1 — short-term wave-riding. Concentrated, high-beta, leverage allowed,
+  # accepts total loss. The "burn" bucket — sized big, but still stopped (riding
+  # 60-80% of a wave still needs a trend exit, not zero risk management).
+  aggressive:
+    description: "Short-term secular-wave riding. Willing to lose all. LLM+regime driven."
+    can_lose_all: true
+    allow_leverage: true
+    execution: briefing      # US names: morning briefing + realtime alerts (manual). Indian: auto via AngelOne.
+    currency: USD
+    capital: 100000   # PAPER reference figure — no real US capital deployed yet
+    universe: [SOXL, NVDA, AMD, AVGO, PLTR, RKLB, COIN, MSTR, BTC-USD, MU, WDC, STX, TSM, QCOM, INTC]
+    risk:
+      risk_per_trade: 0.03          # 3% to stop (4x the quant sleeve)
+      max_name_weight: 0.40         # genuinely concentrated
+      max_sector_weight: 1.00       # single-theme sleeve — sector caps are meaningless here
+      max_gross_exposure: 1.00      # no portfolio margin; SOXL supplies the leverage internally
+      kelly_fraction: 0.20          # SOXL already embeds 3x — modest Kelly ON TOP, not half-Kelly
+      atr_stop_mult: 3.0            # wider stops so wave noise doesn't whipsaw you out
+      max_portfolio_drawdown: 0.50  # de-risk only at -50%, vs -20% for the quant book
+
+  # GOAL 2 — mid-term quant wealth engine. Survival-first. The validated stack.
+  # Inherits the book-wide `risk:` defaults above (unchanged from what was validated).
+  quant:
+    description: "Mid-term quant wealth engine. Survival-first, OOS-validated."
+    can_lose_all: false
+    allow_leverage: false
+    execution: auto
+    currency: USD
+    capital: 100000   # PAPER reference figure — no real US capital deployed yet
+    universe: [NVDA, AMD, AVGO, MSFT, PLTR, GEV, VST, CEG, ETN, LMT, RTX, NOC, CCJ, RKLB, PATH, COIN, MSTR, SPY, QQQ]
+    # risk: (omitted) → uses book-wide `risk:` defaults
+
+  # REAL capital. ₹5,000 → ₹50,000 growth phase (user's stated near-term goal), then
+  # graduates to wealth-protection sizing. NSE via AngelOne. No fixed universe — the daily
+  # screen (features/screening.py + screen_india_universe_job) IS the live candidate pool;
+  # diversified across whatever passes, not concentrated in one name, but still
+  # concentrated ENOUGH per position that each one is economically meaningful at this size.
+  # UPDATE `capital` here as the account actually grows — this number drives real sizing.
+  india:
+    description: "Real ₹5,000→₹50,000 growth capital. NSE via AngelOne."
+    can_lose_all: true
+    allow_leverage: false
+    execution: auto
+    currency: INR
+    capital: 5000
+    universe: []   # live screen supplies candidates — see screen_india_universe_job
+    risk:
+      risk_per_trade: 0.05          # higher than quant — small account, growth-phase goal
+      max_name_weight: 0.25         # concentrated enough to matter, diversified enough to not be one bet
+      max_sector_weight: 0.50
+      max_gross_exposure: 1.00
+      kelly_fraction: 0.30
+      atr_stop_mult: 2.5
+      max_portfolio_drawdown: 0.40
+
+  # GOAL 3 — research / world-models. No capital deployed.
+  research:
+    description: "Research, edge detection, world-models. No capital."
+    can_lose_all: false
+    allow_leverage: false
+    execution: none
+    universe: []

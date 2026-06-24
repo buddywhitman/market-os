@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+# Keep raw lake STRUCTURE but not its (potentially large) contents.
+data_lake/raw/**
+!data_lake/**/.gitkeep
+data_lake/curated/**
+!data_lake/curated/.gitkeep
+data_lake/features/**
+!data_lake/features/.gitkeep
+data_lake/models/**
+!data_lake/models/.gitkeep
+data_lake/backtests/**
+!data_lake/backtests/.gitkeep
+.env

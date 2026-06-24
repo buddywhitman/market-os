@@ -1,0 +1,28 @@
+# Lean stack for Machine 2 (the 24/7 Ubuntu server). Postgres carries pgvector for the
+# RAG/knowledge-graph layer; Redis is the fast cache / queue. Both are tiny and cheap.
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: marketos
+      POSTGRES_PASSWORD: marketos
+      POSTGRES_DB: marketos
+    ports: ["5432:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U marketos"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "60", "1", "--maxmemory", "512mb", "--maxmemory-policy", "allkeys-lru"]
+    ports: ["6379:6379"]
+    volumes:
+      - redisdata:/data
+
+volumes:
+  pgdata:
+  redisdata:

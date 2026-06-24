@@ -1,0 +1,164 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                   MARKET OS PORTFOLIO — QUICK REFERENCE                        ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+👉 START HERE: README.md (this portfolio intro)
+
+═════════════════════════════════════════════════════════════════════════════════
+
+I HAVE 15 MINUTES:
+  → market-os/QUICKSTART.md
+  → cd market-os && make demo
+
+I HAVE 30 MINUTES:
+  → PORTFOLIO_OVERVIEW.md
+  → market-os/docs/RESEARCH_SUMMARY.md
+
+I HAVE 2 HOURS:
+  → README.md
+  → market-os/README.md
+  → market-os/docs/RESEARCH_SUMMARY.md
+  → market-os/QUICKSTART.md (run demo)
+
+I HAVE 4-8 HOURS (Full Deep Dive):
+  → PORTFOLIO_OVERVIEW.md
+  → market-os/README.md
+  → market-os/docs/RESEARCH_SUMMARY.md
+  → market-os/docs/ARCHITECTURE.md
+  → market-os/docs/PRINCIPLES.md
+  → Code exploration (src/marketos/)
+
+═════════════════════════════════════════════════════════════════════════════════
+
+BY ROLE:
+
+📊 Portfolio Manager / CIO
+   1. README.md (10 min)
+   2. PORTFOLIO_OVERVIEW.md (15 min)
+   3. market-os/docs/RESEARCH_SUMMARY.md (20 min)
+   Email: pulkit.talks@gmail.com for partnership discussion
+
+🔬 Quant Researcher
+   1. market-os/README.md (10 min)
+   2. market-os/QUICKSTART.md (30 min - run demo)
+   3. market-os/docs/RESEARCH_SUMMARY.md (30 min)
+   4. market-os/docs/ARCHITECTURE.md (45 min)
+   5. market-os/docs/PRINCIPLES.md (60 min)
+   6. Code walkthrough: src/marketos/ (2-3 hours)
+
+💻 Software Engineer
+   1. market-os/docs/TECHNICAL_SPECS.md (60 min)
+   2. market-os/docs/BUILD_ORDER.md (30 min)
+   3. Makefile, docker-compose.yml, pyproject.toml (30 min)
+   4. src/marketos/ for patterns (1-2 hours)
+
+⚖️  Compliance / Risk Officer
+   1. market-os/docs/PRINCIPLES.md (60 min)
+   2. market-os/docs/TECHNICAL_SPECS.md → Audit (30 min)
+   3. Run: cd market-os && make test
+   4. Audit tests: tests/test_principles.py
+
+═════════════════════════════════════════════════════════════════════════════════
+
+KEY FILES:
+
+ROOT LEVEL:
+  README.md                    ← Start here
+  PORTFOLIO_OVERVIEW.md        ← For partnerships
+  DOCUMENTATION_INDEX.md       ← Navigation guide
+  QUICK_REFERENCE.txt          ← This file
+
+MARKET OS:
+  market-os/README.md          ← Project thesis
+  market-os/QUICKSTART.md      ← Get running in 15 min
+  market-os/Makefile           ← Commands: setup, demo, test, dashboard
+
+MARKET OS DOCS:
+  docs/ARCHITECTURE.md         ← System design (7 layers)
+  docs/RESEARCH_SUMMARY.md     ← Results & benchmarks (Sharpe: 0.74)
+  docs/PRINCIPLES.md           ← 6 enforcement rules
+  docs/TECHNICAL_SPECS.md      ← Integration guide for quant firms
+  docs/BUILD_ORDER.md          ← Dependency graph
+  docs/DATA_CONTRACTS.md       ← Data formats
+
+RESEARCH ARTIFACTS:
+  research-artifacts/README.md ← Papers, case studies
+
+═════════════════════════════════════════════════════════════════════════════════
+
+QUICK COMMANDS:
+
+# Setup & Demo (15 minutes total)
+cd market-os
+make setup        # Create venv + install deps
+make infra-up     # Start PostgreSQL + Redis
+make demo         # Fetch data → features → backtest → results
+
+# Verify System Integrity
+make test         # Run all principle checks
+
+# View Dashboard
+make dashboard    # http://localhost:8501
+
+═════════════════════════════════════════════════════════════════════════════════
+
+BACKTEST RESULTS AT A GLANCE:
+
+H1 Theme Hunter (days-months):
+  Sharpe: 0.68 | Win rate: 51% | Max DD: -18% | Return: 8.2% annual
+
+H2 Mini Hedge Fund (days-weeks):
+  Sharpe: 0.74 | Win rate: 52% | Max DD: -14% | Return: 9.1% annual
+  (Multi-factor diversification improves upon single-factor strategies)
+
+═════════════════════════════════════════════════════════════════════════════════
+
+6 CORE PRINCIPLES (Enforced at Runtime):
+
+1. No black boxes — SHAP attribution on 100% of predictions
+2. Full versioning — Data immutable & hashed
+3. No lookahead — Automated forward-leakage detection in CI
+4. No point forecasts — Report distributions with confidence intervals
+5. Feature edge — Only keep features that improve out-of-sample Sharpe
+6. Simplicity > complexity — Prefer interpretable models
+
+Run `make test` to verify all 6 are maintained.
+
+═════════════════════════════════════════════════════════════════════════════════
+
+ARCHITECTURE LAYERS (7 Total):
+
+1. Data Lake         → Immutable raw + derived data
+2. Feature Store     → Point-in-time, SHAP-attributed, walk-forward tested
+3. Alpha Models      → XGBoost/LightGBM with walk-forward validation
+4. Risk Management   → Regime detection, Kelly sizing, ATR stops
+5. Backtesting       → No-lookahead engine, realistic costs
+6. Agents            → Multi-perspective research, macro, sentiment, risk, PM
+7. Execution         → Real-time streaming + deployment
+
+═════════════════════════════════════════════════════════════════════════════════
+
+FOR PARTNERSHIP INQUIRIES:
+
+Email: pulkit.talks@gmail.com
+Discord: TauricResearch Community (https://discord.com/invite/hk9PGKShPK)
+
+Opportunities:
+  - Model licensing (sentiment, regime detection)
+  - Consulting (custom universe, integration)
+  - Hosted SaaS (managed infrastructure)
+  - Enterprise licensing (self-hosted deployment)
+
+═════════════════════════════════════════════════════════════════════════════════
+
+DISCLAIMER:
+
+This is research software for educational purposes.
+NOT investment/financial/trading advice.
+Past performance ≠ future results.
+Use at your own risk with proper compliance review.
+
+═════════════════════════════════════════════════════════════════════════════════
+
+Version: 1.0
+Last updated: June 2026

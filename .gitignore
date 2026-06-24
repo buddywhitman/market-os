@@ -1,0 +1,95 @@
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.pub
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Testing
+htmlcov/
+.tox/
+.pytest_cache/
+
+# Data (keep structure, not contents)
+data_lake/raw/**
+!data_lake/raw/.gitkeep
+data_lake/curated/**
+!data_lake/curated/.gitkeep
+data_lake/features/**
+!data_lake/features/.gitkeep
+data_lake/models/**
+!data_lake/models/.gitkeep
+data_lake/backtests/**
+!data_lake/backtests/.gitkeep
+
+# Cache & Temp
+.ruff_cache/
+*.tmp
+*.temp
+.cache/
+
+# Node (if used)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Logs
+logs/
+*.log
+
+# Docker
+.dockerignore
+
+# Large files
+*.tar.gz
+*.zip
+*.rar
+
+# Miniforge/conda (keep environment files)
+miniforge3/
+*.sh.bak
+
+# Specific excludes from subdirs (catch-all)
+market-os/.venv/
+market-os/__pycache__/
+market-os/*.egg-info/
+TradingAgents/.venv/
+TradingAgents/__pycache__/
+aiter/.venv/
+aiter/__pycache__/

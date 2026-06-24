@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "market-os"
+version = "0.1.0"
+description = "A continuously evolving market operating system: information extraction, alpha discovery, regime adaptation, compounding."
+requires-python = ">=3.10"
+readme = "README.md"
+dependencies = [
+    "numpy>=1.26",
+    "pandas>=2.1",
+    "polars>=0.20",
+    "pyarrow>=15",
+    "duckdb>=0.10",
+    "pyyaml>=6.0",
+    "scikit-learn>=1.4",
+]
+
+[project.optional-dependencies]
+models = ["xgboost>=2.0", "lightgbm>=4.1", "catboost>=1.2", "optuna>=3.5", "shap>=0.44"]
+ts = ["hmmlearn>=0.3"]
+data = ["yfinance>=0.2.37"]
+backtest = ["vectorbt>=0.26", "quantstats>=0.0.62"]
+dash = ["streamlit>=1.31", "plotly>=5.18"]
+orchestrate = ["prefect>=2.16"]
+dev = ["pytest>=8.0", "ruff>=0.3"]
+all = ["market-os[models,ts,data,backtest,dash,orchestrate,dev]"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

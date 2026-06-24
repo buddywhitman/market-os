@@ -1,4 +1,4 @@
-# Research & Development Portfolio
+# Market OS
 
 A curated collection of quantitative trading systems, market microstructure research, and AI-driven financial intelligence frameworks.
 
@@ -7,7 +7,7 @@ A curated collection of quantitative trading systems, market microstructure rese
 ### 🎯 **Market OS** — Quantitative Trading Infrastructure
 *Primary focus: Explainable alpha generation with risk-aware capital allocation*
 
-A continuously evolving market operating system for systematic trading. Enforces strict principles around reproducibility, data integrity, and explainability—designed for institutional quant and HFT workflows.
+A continuously evolving market operating system for systematic trading. Enforces strict principles around reproducibility, data integrity, and explainability—designed for boutique quant and HFT use.
 
 **Key characteristics:**
 - **Three investment horizons**: Theme Hunter (days–months), Mini Hedge Fund (days–weeks), Market OS (years+)
@@ -32,7 +32,7 @@ make test          # Verify principles enforcement
 ### 📊 TradingAgents — Multi-Agent LLM Trading Framework
 *Reference architecture for collaborative AI trading systems*
 
-Sophisticated multi-agent framework that mirrors dynamics of real trading firms. LLM-powered agents (fundamental analysts, sentiment experts, technicians, risk managers) collaborate to evaluate markets and inform decisions.
+Sophisticated multi-agent framework that mirrors the dynamics of real trading firms. LLM-powered agents (fundamental analysts, sentiment experts, technicians, risk managers) collaborate to evaluate markets and inform decisions.
 
 **Specialized roles:**
 - Analyst Team: Fundamentals, Sentiment, News, Technical
@@ -157,10 +157,10 @@ Papers, benchmarks, and case studies available in `/research-artifacts/`:
 If this research informs your work, please cite:
 ```bibtex
 @software{marketos2024,
-  title={Market OS: A Quantitative Trading Infrastructure},
-  author={Whitman, Pulkit},
+  title={Market OS: Quantitative Trading Infrastructure},
+  author={Kumar, Pulkit},
   year={2024},
-  url={https://github.com/...}
+  url={https://github.com/buddywhitman/market-os}
 }
 ```
 
